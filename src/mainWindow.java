@@ -77,6 +77,7 @@ public class mainWindow extends JDialog {
 
     public static void main(String[] args) {
         mainWindow dialog = new mainWindow();
+        dialog.setTitle("Receive msg");
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);

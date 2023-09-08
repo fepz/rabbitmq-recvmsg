@@ -11,6 +11,7 @@ public class mainWindow extends JDialog {
     private JTextField urlTextField;
     private JTextField msgTextField;
     private JTextField statusTextField;
+    private JTextField keyTextField;
     private ConnectionFactory factory;
     private final static String QUEUE_NAME = "prueba";
 
@@ -55,9 +56,10 @@ public class mainWindow extends JDialog {
             factory.setUri(urlTextField.getText());
             Connection connection = factory.newConnection();
             Channel channel = connection.createChannel();
-            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            String key = keyTextField.getText();
+            channel.queueDeclare(key, false, false, false, null);
 
-            GetResponse msg = channel.basicGet(QUEUE_NAME, true);
+            GetResponse msg = channel.basicGet(key, true);
 
             if (msg != null) {
                 msgTextField.setText(new String(msg.getBody()));
